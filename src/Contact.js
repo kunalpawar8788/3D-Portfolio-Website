@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { app } from "./firebase";
 import "./App.css"; // optional
-import { FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaFacebook } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaTwitter, FaInstagram } from "react-icons/fa";
 
 
 const firestore = getFirestore(app);

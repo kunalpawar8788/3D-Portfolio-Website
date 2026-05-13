@@ -5,8 +5,6 @@ import Contact from "./Contact";
 import Card from "./Card";
 import Chatbot from "./Chatbot";
 import "./App.css";
-import {getDatabase, ref} from 'firebase/database';
-import {app} from './firebase'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 

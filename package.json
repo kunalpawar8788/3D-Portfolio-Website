@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "concurrently \"cd client && npm run dev\" \"cd server && npm run dev\"",
-    "build": "cd client && npm run build",
-    "preview": "cd client && npm run preview",
-    "start": "cd server && npm run start",
-    "seed": "cd server && npm run seed"
+    "build": "npm run build --prefix client",
+    "preview": "npm run preview --prefix client",
+    "start": "npm run start --prefix server",
+    "seed": "npm run seed --prefix server"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
