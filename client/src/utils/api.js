@@ -103,3 +103,27 @@ export const submitContact = async (payload) => {
 
   return result;
 };
+
+export const submitContactToFirestore = async (payload) => {
+  try {
+    const { collection, addDoc } = await import("firebase/firestore");
+    const { db } = await import("../firebase.js");
+
+    const contactData = {
+      name: payload.name,
+      email: payload.email,
+      message: payload.message,
+      createdAt: new Date().toISOString(),
+    };
+
+    const docRef = await addDoc(collection(db, "contactMessages"), contactData);
+
+    return {
+      success: true,
+      message: "Message sent successfully.",
+      data: { id: docRef.id, ...contactData },
+    };
+  } catch (error) {
+    throw new Error(error.message || "Failed to submit contact form to Firebase.");
+  }
+};

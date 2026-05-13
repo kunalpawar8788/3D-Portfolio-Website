@@ -4,7 +4,7 @@ import ConfettiBlast from "../components/ConfettiBlast";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { FiDownload, FiMail, FiPhone, FiSend } from "react-icons/fi";
 
-import { submitContact } from "../utils/api";
+import { submitContactToFirestore } from "../utils/api";
 
 const initialForm = {
   name: "",
@@ -54,7 +54,7 @@ const ContactSection = () => {
     try {
       setSubmitting(true);
       setStatus({ type: "", message: "" });
-      await submitContact({
+      await submitContactToFirestore({
         name: formData.name,
         email: formData.email,
         message: `[${formData.subject}] ${formData.message}`,
