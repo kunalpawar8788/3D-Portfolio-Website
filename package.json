@@ -2,10 +2,13 @@
   "name": "portfolio-website",
   "version": "1.0.0",
   "private": true,
+  "workspaces": [
+    "client"
+  ],
   "scripts": {
     "dev": "concurrently \"cd client && npm run dev\" \"cd server && npm run dev\"",
-    "build": "npm run build --prefix client",
-    "preview": "npm run preview --prefix client",
+    "build": "npm run build --workspace client",
+    "preview": "npm run preview --workspace client",
     "start": "npm run start --prefix server",
     "seed": "npm run seed --prefix server"
   },
