@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API_BASE = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "http://localhost:5000/api" : "/api");
 const GITHUB_USERNAME = import.meta.env.VITE_GITHUB_USERNAME || "kunalpawar8788";
 
 const toTitleCase = (value) =>
@@ -102,28 +102,4 @@ export const submitContact = async (payload) => {
   }
 
   return result;
-};
-
-export const submitContactToFirestore = async (payload) => {
-  try {
-    const { collection, addDoc } = await import("firebase/firestore");
-    const { db } = await import("../firebase.js");
-
-    const contactData = {
-      name: payload.name,
-      email: payload.email,
-      message: payload.message,
-      createdAt: new Date().toISOString(),
-    };
-
-    const docRef = await addDoc(collection(db, "contactMessages"), contactData);
-
-    return {
-      success: true,
-      message: "Message sent successfully.",
-      data: { id: docRef.id, ...contactData },
-    };
-  } catch (error) {
-    throw new Error(error.message || "Failed to submit contact form to Firebase.");
-  }
 };

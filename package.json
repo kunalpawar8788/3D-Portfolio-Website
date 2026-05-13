@@ -9,6 +9,9 @@
     "start": "npm run start --prefix server",
     "seed": "npm run seed --prefix server"
   },
+  "dependencies": {
+    "firebase-admin": "^13.9.0"
+  },
   "devDependencies": {
     "concurrently": "^8.2.2"
   }
