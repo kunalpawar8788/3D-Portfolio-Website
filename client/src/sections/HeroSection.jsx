@@ -129,7 +129,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="full-bleed hero-ref relative min-h-screen overflow-hidden px-4 pb-24 pt-5 md:px-8 md:pb-28 lg:px-12 xl:px-20"
+      className="full-bleed hero-ref relative min-h-screen overflow-hidden px-4 pb-0 pt-5 md:px-8 md:pb-28 lg:px-12 xl:px-20"
       onPointerMove={handleHeroPointerMove}
       onPointerLeave={resetHeroPointer}
     >
@@ -250,6 +250,20 @@ const HeroSection = () => {
           </motion.a>
         </div>
       </main>
+
+      {/* Mobile-only scroll hint (center bottom) */}
+      <button
+        aria-label="Scroll down"
+        onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+        className="lg:hidden absolute left-1/2 bottom-28 z-50 -translate-x-1/2 flex items-center gap-2 rounded-full bg-black/40 px-3 py-2 text-sm font-medium text-white/90 backdrop-blur-md shadow-md transition-transform hover:scale-105 sm:bottom-20"
+        style={{ pointerEvents: 'auto' }}
+      >
+        <svg className="h-4 w-4 text-white/90 animate-bounce" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+          <path d="M12 5v14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M19 12l-7 7-7-7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        <span className="select-none">Scroll</span>
+      </button>
 
     </section>
   );
