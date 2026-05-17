@@ -75,7 +75,7 @@ const App = () => {
   };
 
   return (
-    <div className={`relative min-h-screen overflow-x-hidden bg-cyber-bg text-white ${theme === "light" ? "light-mode" : ""}`}>
+    <div className={`relative min-h-screen overflow-x-hidden bg-black text-white ${theme === "light" ? "light-mode" : ""}`}>
       <CustomCursor />
       <ScrollProgress />
       <AnimatePresence mode="wait">

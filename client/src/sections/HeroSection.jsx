@@ -197,6 +197,7 @@ const HeroSection = () => {
             <OrbitControls
               enablePan={false}
               enableZoom={false}
+              enableRotate={false}
               enableDamping
               dampingFactor={0.08}
               rotateSpeed={0.6}

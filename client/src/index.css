@@ -24,7 +24,7 @@ html {
 body {
   margin: 0;
   font-family: "Space Grotesk", sans-serif;
-  background: #030806;
+  background: #000000;
   color: #f8f8fc;
   cursor: none;
   overflow-x: hidden;
@@ -36,30 +36,30 @@ body {
 
 .site-global-bg {
   background:
-    radial-gradient(circle at 18% 24%, rgba(125, 95, 255, 0.24), transparent 0 12%, transparent 20%),
-    radial-gradient(circle at 82% 18%, rgba(74, 221, 255, 0.18), transparent 0 10%, transparent 18%),
-    radial-gradient(circle at 68% 70%, rgba(255, 212, 102, 0.1), transparent 0 8%, transparent 16%),
-    radial-gradient(circle at 42% 56%, rgba(74, 255, 173, 0.12), transparent 0 14%, transparent 24%),
-    radial-gradient(circle at 50% 50%, rgba(18, 22, 45, 0.24), transparent 55%),
-    #030806;
-  filter: blur(22px) saturate(135%);
-  opacity: 0.9;
-  animation: galaxyDrift 28s ease-in-out infinite alternate;
+    radial-gradient(circle at 18% 24%, rgba(0, 0, 0, 0.92), transparent 0 14%, transparent 24%),
+    radial-gradient(circle at 82% 18%, rgba(0, 0, 0, 0.86), transparent 0 10%, transparent 20%),
+    radial-gradient(circle at 68% 70%, rgba(0, 0, 0, 0.7), transparent 0 8%, transparent 16%),
+    radial-gradient(circle at 42% 56%, rgba(0, 0, 0, 0.82), transparent 0 14%, transparent 24%),
+    radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.96), transparent 55%),
+    #000000;
+  filter: blur(22px) saturate(100%);
+  opacity: 1;
+  animation: none;
 }
 
 .site-global-grid {
   background-image:
-    linear-gradient(rgba(70, 255, 173, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(70, 255, 173, 0.06) 1px, transparent 1px),
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02) 1px, transparent 2px, transparent 4px);
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.012), rgba(255, 255, 255, 0.012) 1px, transparent 2px, transparent 4px);
   background-size: 34px 34px, 34px 34px, 100% 100%;
-  opacity: 0.92;
-  animation: starDrift 44s linear infinite;
+  opacity: 0.75;
+  animation: none;
 }
 
 @media (max-width: 1024px) {
   body {
-    cursor: default;
+    cursor: none;
   }
 }
 
@@ -336,4 +336,13 @@ a:hover, button:hover, .group:hover, .interactive:hover, a[class*="btn"]:hover, 
     margin-left: 0;
     margin-right: 0;
   }
+}
+
+/* Custom cursor: ensure it's never affected by parent filters or blend modes */
+div[style*="h-2.5"],
+div[style*="h-8 w-8"] {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  backdrop-filter: none !important;
+  will-change: auto !important;
 }

@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         cyber: {
-          bg: "#080A12",
+          bg: "#000000",
           panel: "rgba(255, 255, 255, 0.08)",
           border: "rgba(255, 255, 255, 0.18)",
           neon: "#00F5D4",
