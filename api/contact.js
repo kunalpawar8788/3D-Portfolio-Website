@@ -2,6 +2,23 @@ const admin = require("firebase-admin");
 
 let firestore = null;
 
+const normalizePrivateKey = (key) => {
+  if (!key) {
+    return key;
+  }
+
+  let normalized = String(key).trim();
+
+  if (
+    (normalized.startsWith('"') && normalized.endsWith('"')) ||
+    (normalized.startsWith("'") && normalized.endsWith("'"))
+  ) {
+    normalized = normalized.slice(1, -1);
+  }
+
+  return normalized.replace(/\\n/g, "\n");
+};
+
 const getFirebaseCredentials = () => {
   const serviceAccountJson = process.env.FIREBASE_SERVICE_ACCOUNT_JSON;
 
@@ -11,14 +28,14 @@ const getFirebaseCredentials = () => {
     return {
       projectId: serviceAccount.project_id || serviceAccount.projectId,
       clientEmail: serviceAccount.client_email || serviceAccount.clientEmail,
-      privateKey: (serviceAccount.private_key || serviceAccount.privateKey)?.replace(/\\n/g, "\n"),
+      privateKey: normalizePrivateKey(serviceAccount.private_key || serviceAccount.privateKey),
     };
   }
 
   return {
     projectId: process.env.FIREBASE_PROJECT_ID,
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-    privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+    privateKey: normalizePrivateKey(process.env.FIREBASE_PRIVATE_KEY),
   };
 };
 
