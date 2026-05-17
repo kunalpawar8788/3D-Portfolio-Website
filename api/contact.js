@@ -2,18 +2,38 @@ const admin = require("firebase-admin");
 
 let firestore = null;
 
+const getFirebaseCredentials = () => {
+  const serviceAccountJson = process.env.FIREBASE_SERVICE_ACCOUNT_JSON;
+
+  if (serviceAccountJson) {
+    const serviceAccount = JSON.parse(serviceAccountJson);
+
+    return {
+      projectId: serviceAccount.project_id || serviceAccount.projectId,
+      clientEmail: serviceAccount.client_email || serviceAccount.clientEmail,
+      privateKey: (serviceAccount.private_key || serviceAccount.privateKey)?.replace(/\\n/g, "\n"),
+    };
+  }
+
+  return {
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+    privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+  };
+};
+
 const getFirestore = () => {
   if (firestore) {
     return firestore;
   }
 
   if (!admin.apps.length) {
-    const projectId = process.env.FIREBASE_PROJECT_ID;
-    const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
-    const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+    const { projectId, clientEmail, privateKey } = getFirebaseCredentials();
 
     if (!projectId || !clientEmail || !privateKey) {
-      throw new Error("Firebase environment variables are not configured.");
+      throw new Error(
+        "Firebase environment variables are not configured. Set FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, and FIREBASE_PRIVATE_KEY in Vercel, or set FIREBASE_SERVICE_ACCOUNT_JSON."
+      );
     }
 
     admin.initializeApp({
